@@ -1,0 +1,15 @@
+{
+    "name": "oled",
+    "version": "0.1.0",
+    "description": "OLED extension for nano bit",
+    "license": "MIT",
+    "dependencies": {
+        "core": "*"
+    },
+    "files": [
+        "README.md",
+        "main.ts"
+    ],
+    "public": true,
+    "preferredEditor": "tsprj"
+}
