@@ -3,9 +3,140 @@ Riven
 load dependency
 "nanobit": "file:../pxt-oled"
 */
+const enum LcdPosition1604 {
+    //% block="0"
+    P0 = 0,
+    //% block="1"
+    P1 = 1,
+    //% block="2"
+    P2 = 2,
+    //% block="3"
+    P3 = 3,
+    //% block="4"
+    P4 = 4,
+    //% block="5"
+    P5 = 5,
+    //% block="6"
+    P6 = 6,
+    //% block="7"
+    P7 = 7,
+    //% block="8"
+    P8 = 8,
+    //% block="9"
+    P9 = 9,
+    //% block="10"
+    P10 = 10,
+    //% block="11"
+    P11 = 11,
+    //% block="12"
+    P12 = 12,
+    //% block="13"
+    P13 = 13,
+    //% block="14"
+    P14 = 14,
+    //% block="15"
+    P15 = 15,
+    //% block="16"
+    P16 = 16,
+    //% block="17"
+    P17 = 17,
+    //% block="18"
+    P18 = 18,
+    //% block="19"
+    P19 = 19,
+    //% block="20"
+    P20 = 20,
+    //% block="21"
+    P21 = 21,
+    //% block="22"
+    P22 = 22,
+    //% block="23"
+    P23 = 23,
+    //% block="24"
+    P24 = 24,
+    //% block="25"
+    P25 = 25,
+    //% block="26"
+    P26 = 26,
+    //% block="27"
+    P27 = 27,
+    //% block="28"
+    P28 = 28,
+    //% block="29"
+    P29 = 29,
+    //% block="30"
+    P30 = 30,
+    //% block="31"
+    P31 = 31,
+    //% block="32"
+    P32 = 32,
+    //% block="33"
+    P33 = 33,
+    //% block="34"
+    P34 = 34,
+    //% block="35"
+    P35 = 35,
+    //% block="36"
+    P36 = 36,
+    //% block="37"
+    P37 = 37,
+    //% block="38"
+    P38 = 38,
+    //% block="39"
+    P39 = 39,
+    //% block="40"
+    P40 = 40,
+    //% block="41"
+    P41 = 41,
+    //% block="42"
+    P42 = 42,
+    //% block="43"
+    P43 = 43,
+    //% block="44"
+    P44 = 44,
+    //% block="45"
+    P45 = 45,
+    //% block="46"
+    P46 = 46,
+    //% block="47"
+    P147 = 47,
+    //% block="48"
+    P48 = 48,
+    //% block="49"
+    P49 = 49,
+    //% block="50"
+    P50 = 50,
+    //% block="51"
+    P51 = 51,
+    //% block="52"
+    P52 = 52,
+    //% block="53"
+    P53 = 53,
+    //% block="54"
+    P54 = 54,
+    //% block="55"
+    P55 = 55,
+    //% block="56"
+    P56 = 56,
+    //% block="57"
+    P57 = 57,
+    //% block="58"
+    P58 = 58,
+    //% block="59"
+    P59 = 59,
+    //% block="60"
+    P60 = 60,
+    //% block="61"
+    P61 = 61,
+    //% block="62"
+    P62 = 62,
+    //% block="63"
+    P63 = 63
+}
 
 //% color=#27b0ba weight=100 icon="\uf26c"
 namespace OledKitten{
+
     const ADDR = 0x3c
     const SET_CONTRAST = 0x81
     const SET_ENTIRE_ON = 0xa4
@@ -344,10 +475,12 @@ namespace OledKitten{
         for (let cmd of cmdList){
             i2ccmd(cmd)
         }
+        fill(0)
     }
 
     //% block="Oled Fill %pattern"
     //% weight=99
+    //% advanced=true
     export function fill(pattern: number) {
         let pages = height / 8;
         let xpos0 = 0
@@ -369,7 +502,20 @@ namespace OledKitten{
         }
     }
 
+    //% block="Oled Clear"
+    //% weight=99
+    export function clear() {
+        fill(0)
+    }
+
+
+    /**
+    * Displays a text on OLED
+    * @param str the text to show, eg: "NanoBit"
+    */
     //% block="Oled Text x%x line%line %str"
+    //% x.min=0 x.max=15
+    //% line.min=0 line.max=3
     //% weight=99
     export function drawText(x: number, line: number, str: string){
         let numchar = str.length;
@@ -388,6 +534,31 @@ namespace OledKitten{
             buf.write(1, font8.data.slice(uni*5, 5))
             pins.i2cWriteBuffer(ADDR, buf)
         }
+    }
+
+    /**
+     * @param pos the LCD position, eg: LcdPosition1604.P0
+     */
+    //% subcategory="LCD"
+    //% blockId=lcd_pos1604
+    //% block="%pos"
+    //% pos.fieldEditor="gridpicker"
+    //% pos.fieldOptions.columns=16
+    //% blockHidden=true
+    export function pos1604(pos: LcdPosition1604): number {
+        return pos;
+    }
+
+    /**
+    * @param pos the start position on the LCD, [0 - 63]
+    * @param str the text to show, eg: "NanoBit"
+    */
+    //% block="Oled Text position %pos=lcd_pos1604 %str"
+    //% weight=89
+    export function drawTextPos(pos: number, str: string) {
+        let x = Math.floor(pos%16)*8;
+        let y = Math.floor(pos/16);
+        drawText(x, y, str);
     }
 
 
