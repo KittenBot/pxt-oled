@@ -536,6 +536,50 @@ namespace OledKitten{
         }
     }
 
+    //% block="Oled Text 2X x%x line%line %str"
+    //% x.min=0 x.max=15
+    //% line.min=0 line.max=2
+    //% weight=99
+    export function drawText2X(x: number, line: number, str: string) {
+        let numchar = str.length;
+        if (numchar > 25) numchar = 25;
+        i2ccmd(SET_COL_ADDR)
+        i2ccmd(x)
+        i2ccmd(x + 5 * numchar * 2-1)
+        i2ccmd(SET_PAGE_ADDR)
+        i2ccmd(line)
+        i2ccmd(line + 2)
+        let txtBuf = pins.createBuffer(numchar*20) // 1 char = 16x10/8
+        for (let idx = 0;idx<numchar; idx++){
+            let uni = str.charCodeAt(idx)
+            let fontBuf = font8.data.slice(uni * 5, 5)
+            for (let i=0;i<5;i++){
+                let h = fontBuf[i]
+                txtBuf[idx * 5*2 + i * 2] = txtBuf[idx * 5*2 + i * 2 + 1] = 0
+                txtBuf[(idx + numchar) * 5*2 + i * 2] = txtBuf[(idx + numchar) * 5*2 + i * 2 + 1] = 0
+                for (let j=0;j<7;j++){
+                    if ((h>>j)&0x1){
+                        if (j<4){
+                            txtBuf[idx * 5*2 + i * 2] += (0x3<<(j*2))
+                            txtBuf[idx * 5*2 + i * 2+1] += (0x3 << (j * 2))
+                        } else {
+                            txtBuf[(idx + numchar) * 5*2 + i * 2] += (0x3 << ((j-4) * 2))
+                            txtBuf[(idx + numchar) * 5*2 + i * 2 + 1] += (0x3 << ((j-4) * 2))
+                        }
+                    }
+                }
+            }
+        }
+
+        let buf = pins.createBuffer(21)
+        buf[0] = 0x40
+        let xpos = x;
+        for (let i = 0; i < numchar; i++) {
+            buf.write(1, txtBuf.slice(i*20, 20))
+            pins.i2cWriteBuffer(ADDR, buf)
+        }
+    }
+
     /**
      * @param pos the LCD position, eg: LcdPosition1604.P0
      */
@@ -563,4 +607,5 @@ namespace OledKitten{
 
 
 }
+
 
