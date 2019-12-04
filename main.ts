@@ -155,8 +155,7 @@ namespace OledKitten{
     const SET_PRECHARGE = 0xd9
     const SET_VCOM_DESEL = 0xdb
     const SET_CHARGE_PUMP = 0x8d
-    
-    
+       
     //% whenUsed
     const font8 = {
         charWidth: 5,
@@ -435,9 +434,9 @@ namespace OledKitten{
     }
 
     export enum OledType {
-        //% blockId="oled12864" block="128x64"
+        //% blockId="oled12864" block="128x64 0.96"
         oled12864 = 0,
-        //% blockId="oled12832" block="128x32"
+        //% blockId="oled12832" block="128x32 0.91"
         oled12832 = 1,
     }
     
@@ -605,6 +604,18 @@ namespace OledKitten{
         drawText(x, y, str);
     }
 
+    export function displayBuffer(x: number, y: number, w:number, h:number, a: Buffer) {
+        i2ccmd(SET_COL_ADDR)
+        i2ccmd(x)
+        i2ccmd(x + w-1)
+        i2ccmd(SET_PAGE_ADDR)
+        i2ccmd(y)
+        i2ccmd(y + 1)
+        let buf = pins.createBuffer(1+a.length)
+        buf[0] = 0x40
+        buf.write(1, a)
+        pins.i2cWriteBuffer(ADDR, buf)
+    }
 
 }
 

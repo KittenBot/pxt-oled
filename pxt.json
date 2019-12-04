@@ -1,6 +1,6 @@
 {
     "name": "oled",
-    "version": "0.1.1",
+    "version": "0.1.3",
     "description": "OLED extension for nano bit",
     "license": "MIT",
     "dependencies": {
@@ -11,5 +11,10 @@
         "main.ts"
     ],
     "public": true,
-    "preferredEditor": "tsprj"
+    "preferredEditor": "tsprj",
+    "extension": {
+        "namespace": "OledKitten",
+        "label": "NeoMatrix Editor",
+        "localUrl": "https://kittenbot.github.io/pxt-neomatrix/index.html"
+    }
 }
