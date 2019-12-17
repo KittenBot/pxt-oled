@@ -513,19 +513,20 @@ namespace OledKitten{
     * @param str the text to show, eg: "NanoBit"
     */
     //% block="Oled Text x%x line%line %str"
-    //% x.min=0 x.max=15
+    //% x.min=0 x.max=127
     //% line.min=0 line.max=3
     //% weight=99
     export function drawText(x: number, line: number, str: string){
         let numchar = str.length;
-        if (numchar > 25) numchar = 25;
+        let maxchar = Math.floor((width-1-x)/8)
+        if (numchar > maxchar) numchar = maxchar;
         i2ccmd(SET_COL_ADDR)
         i2ccmd(x)
-        i2ccmd(x + 8 * numchar)
+        i2ccmd(width - 1)
         i2ccmd(SET_PAGE_ADDR)
         i2ccmd(line)
         i2ccmd(line+1)
-        let buf = pins.createBuffer(8)
+        let buf = pins.createBuffer(9)
         buf[0] = 0x40
         let xpos = x;
         for (let idx = 0; idx < numchar;idx++){
@@ -536,18 +537,18 @@ namespace OledKitten{
     }
 
     //% block="Oled Text 2X x%x line%line %str"
-    //% x.min=0 x.max=15
-    //% line.min=0 line.max=2
+    //% x.min=0 x.max=127
+    //% line.min=0 line.max=1
     //% weight=99
     export function drawText2X(x: number, line: number, str: string) {
         let numchar = str.length;
         if (numchar > 25) numchar = 25;
         i2ccmd(SET_COL_ADDR)
         i2ccmd(x)
-        i2ccmd(x + 5 * numchar * 2-1)
+        i2ccmd(x + 5 * numchar * 2 - 1)
         i2ccmd(SET_PAGE_ADDR)
-        i2ccmd(line)
-        i2ccmd(line + 2)
+        i2ccmd(line*2)
+        i2ccmd(line*2 + 2)
         let txtBuf = pins.createBuffer(numchar*20) // 1 char = 16x10/8
         for (let idx = 0;idx<numchar; idx++){
             let uni = str.charCodeAt(idx)

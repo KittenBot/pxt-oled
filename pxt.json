@@ -1,6 +1,6 @@
 {
     "name": "oled",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "description": "OLED extension for nano bit",
     "license": "MIT",
     "dependencies": {
