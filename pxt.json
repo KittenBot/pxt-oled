@@ -1,6 +1,6 @@
 {
     "name": "oled",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "description": "OLED extension for nano bit",
     "license": "MIT",
     "dependencies": {
@@ -8,7 +8,9 @@
     },
     "files": [
         "README.md",
-        "main.ts"
+        "main.ts",
+        "_locales/zh-cn/oled-strings.json",
+        "_locales/zh-tw/oled-strings.json"
     ],
     "public": true,
     "preferredEditor": "tsprj",

@@ -1,0 +1,8 @@
+{
+    "OledKitten.oledInit|block": "初始化Oled |類型 %t",
+    "OledKitten.clear|block": "Oled 清屏",
+    "OledKitten.drawText|block": "Oled x坐標%x 行%line 顯示 %str",
+    "OledKitten.drawText2X|block": "Oled x坐標%x 行%line 2倍大顯示 %str",
+    "OledKitten.drawTextPos|block": "Oled 位置 %pos=lcd_pos1604 |顯示%str",
+    "OledKitten.fill|block": "Oled 填充 %pattern"
+}

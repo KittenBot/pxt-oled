@@ -1,7 +1,7 @@
 /*
 Riven
 load dependency
-"nanobit": "file:../pxt-oled"
+"oled": "file:../pxt-oled"
 */
 const enum LcdPosition1604 {
     //% block="0"
@@ -512,7 +512,7 @@ namespace OledKitten{
     * Displays a text on OLED
     * @param str the text to show, eg: "NanoBit"
     */
-    //% block="Oled Text x%x line%line %str"
+    //% block="Oled display x%x line%line Text %str"
     //% x.min=0 x.max=127
     //% line.min=0 line.max=3
     //% weight=99
@@ -536,7 +536,11 @@ namespace OledKitten{
         }
     }
 
-    //% block="Oled Text 2X x%x line%line %str"
+    /**
+    * Displays a text on OLED (two times larger)
+    * @param str the text to show, eg: "NanoBit"
+    */
+    //% block="Oled display2X x%x line%line Text %str"
     //% x.min=0 x.max=127
     //% line.min=0 line.max=1
     //% weight=99
@@ -597,7 +601,7 @@ namespace OledKitten{
     * @param pos the start position on the LCD, [0 - 63]
     * @param str the text to show, eg: "NanoBit"
     */
-    //% block="Oled Text position %pos=lcd_pos1604 %str"
+    //% block="Oled position %pos=lcd_pos1604 diaplay %str"
     //% weight=89
     export function drawTextPos(pos: number, str: string) {
         let x = Math.floor(pos%16)*8;

@@ -1,0 +1,18 @@
+{
+    "target": "microbit",
+    "targetVersion": "1.4.11",
+    "name": "oled",
+    "meta": {},
+    "editor": "tsprj",
+    "pubId": "",
+    "pubCurrent": false,
+    "_rev": null,
+    "id": "0eea5b84-2de5-4936-83ea-1ef015dc82c1",
+    "recentUse": 1577246278,
+    "modificationTime": 1577246278,
+    "blobId": null,
+    "blobVersion": null,
+    "blobCurrent": false,
+    "isDeleted": false,
+    "path": "pxt-oled"
+}
