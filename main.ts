@@ -134,7 +134,7 @@ const enum LcdPosition1604 {
     P63 = 63
 }
 
-//% color=#27b0ba weight=100 icon="\uf26c"
+//% color=#27b0ba weight=8 icon="\uf26c"
 namespace OledKitten{
 
     const ADDR = 0x3c
