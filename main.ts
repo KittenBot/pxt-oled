@@ -601,7 +601,7 @@ namespace OledKitten{
     * @param pos the start position on the LCD, [0 - 63]
     * @param str the text to show, eg: "NanoBit"
     */
-    //% block="Oled position %pos=lcd_pos1604 diaplay %str"
+    //% block="Oled position %pos=lcd_pos1604 display %str"
     //% weight=89
     export function drawTextPos(pos: number, str: string) {
         let x = Math.floor(pos%16)*8;
